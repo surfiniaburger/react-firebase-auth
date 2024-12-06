@@ -1,18 +1,18 @@
 import { useState } from "react";
-import { register } from "../firebase";
-import { useDispatch } from "react-redux";
-import { login as loginHandle } from "../redux/userSlice";
+import { login } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const user = await register(email, password);
-    dispatch(loginHandle(user));
+    const user = await login(email, password);
+    if (user) {
+      navigate("/", { replace: true });
+    }
   };
   return (
     <form
@@ -53,11 +53,11 @@ const Register = () => {
           type="submit"
           className="inline-flex disabled:opacity-40 items-center justify-center px-4 py-2 border  border-transparent bg-indigo-600 hover:bg-indigo-700 rounded-md focus:outline-none focus:ring-2 cursor-pointer focus:ring-offset-2 focus:ring-indigo-500 text-white font-medium "
         >
-          Kayıt Ol
+          Giriş Yap
         </button>
       </div>
     </form>
   );
 };
 
-export default Register;
+export default Login;
