@@ -36,22 +36,22 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-col">
       <form
         onSubmit={handleSubmit}
         className="min-w-96 mx-auto grid gap-y-4 py-4 mt-20"
       >
         <h1 className="text-2xl bg-indigo-400 rounded-md text-center py-1 bg-opacity-80">
-          Profili Güncelle
+          Profile
         </h1>
         <div>
-          <label className="block  font-medium text-gray-800 text-xl">
-            Ad Soyad
+          <label className="block font-medium text-gray-800 text-xl">
+            Full Name
           </label>
           <div className="my-1">
             <input
               type="text"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-900 rounded-md "
+              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-900 rounded-md"
               placeholder="Davinson Sanches"
               value={displayname}
               onChange={(e) => setDisplayName(e.target.value)}
@@ -59,13 +59,13 @@ const UpdateProfile = () => {
           </div>
         </div>
         <div>
-          <label className="block  font-medium text-gray-800 text-xl">
-            Fotoğraf
+          <label className="block font-medium text-gray-800 text-xl">
+            Photo
           </label>
           <div className="my-1">
             <input
               type="text"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-900 rounded-md "
+              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-900 rounded-md"
               placeholder="Davinson Sanches"
               value={avatar}
               onChange={(e) => setAvatar(e.target.value)}
@@ -74,9 +74,9 @@ const UpdateProfile = () => {
         </div>
         <button
           type="submit"
-          className="inline-flex disabled:opacity-40 items-center justify-center px-4 py-2 border  border-transparent bg-indigo-600 hover:bg-indigo-700 rounded-md focus:outline-none focus:ring-2 cursor-pointer focus:ring-offset-2 focus:ring-indigo-500 text-white font-medium "
+          className="inline-flex disabled:opacity-40 items-center justify-center px-4 py-2 border border-transparent bg-indigo-600 hover:bg-indigo-700 rounded-md focus:outline-none focus:ring-2 cursor-pointer focus:ring-offset-2 focus:ring-indigo-500 text-white font-medium"
         >
-          Güncelle
+          Update
         </button>
       </form>
       <form
@@ -84,17 +84,17 @@ const UpdateProfile = () => {
         className="min-w-96 mx-auto grid gap-y-4 py-4 mt-10"
       >
         <h1 className="text-2xl bg-gray-500 text-white rounded-md text-center py-1 bg-opacity-80">
-          Parolayı Güncelle
+          Update Password
         </h1>
         <div>
-          <label className="block  font-medium text-gray-800 text-xl">
-            Yeni Parola
+          <label className="block font-medium text-gray-800 text-xl">
+            New Password
           </label>
           <div className="my-1">
             <input
               type="password"
-              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-900 rounded-md "
-              placeholder="Yeni parolanızı giriniz.."
+              className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-900 rounded-md"
+              placeholder="Enter your new password..."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -104,9 +104,9 @@ const UpdateProfile = () => {
         <button
           type="submit"
           disabled={!password}
-          className="inline-flex disabled:opacity-40 items-center justify-center px-4 py-2 border  border-transparent bg-indigo-600 hover:bg-indigo-700 rounded-md focus:outline-none focus:ring-2 cursor-pointer focus:ring-offset-2 focus:ring-indigo-500 text-white font-medium "
+          className="inline-flex disabled:opacity-40 items-center justify-center px-4 py-2 border border-transparent bg-indigo-600 hover:bg-indigo-700 rounded-md focus:outline-none focus:ring-2 cursor-pointer focus:ring-offset-2 focus:ring-indigo-500 text-white font-medium"
         >
-          Parolayı Güncelle
+          Update Password
         </button>
       </form>
     </div>

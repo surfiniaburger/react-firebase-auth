@@ -2,7 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout, emailVerification } from "../firebase";
 import { logout as logoutHandle } from "../redux/userSlice";
-import UpdateProfile from "../components/UpdateProfile";
+//import UpdateProfile from "../components/UpdateProfile";
+import EmbeddedMap from "./Map";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -23,12 +24,12 @@ const Home = () => {
 
   if (user) {
     return (
-      <div className="flex  flex-col items-center gap-5 mt-5 ">
-        <div className="flex items-center gap-3 ">
+      <div className="flex flex-col items-center gap-5 mt-5">
+        <div className="flex items-center gap-3">
           {user.photoURL && (
             <img src={user.photoURL} className="w-16 h-16 rounded-full" />
           )}
-          <h1 className="text-3xl ">Oturumunuz açıldı {">>>>"}</h1>
+          <h1 className="text-3xl">Session Active {">>>>"}</h1>
           <span className="text-2xl font-semibold text-indigo-700">
             {user.email}
           </span>
@@ -38,27 +39,27 @@ const Home = () => {
             onClick={handleLogOut}
             className="bg-indigo-500 px-3 py-2 font-semibold text-white rounded-md text-xl hover:bg-indigo-600 cursor-pointer transition hover:scale-95"
           >
-            Çıkış Yap
+            Logout
           </button>
           {!user.emailVerified && (
             <button
               onClick={handleVerification}
               className="bg-indigo-500 px-3 py-2 font-semibold text-white rounded-md text-xl hover:bg-indigo-600 cursor-pointer transition hover:scale-95"
             >
-              E-Posta Onayla
+              Verify Email
             </button>
           )}
         </div>
 
-        <UpdateProfile />
+        <EmbeddedMap />
       </div>
     );
   }
 
   return (
     <div>
-      <Link to="/register">Kayıt ol</Link>
-      <Link to="/login">Giriş yap</Link>
+      <Link to="/register">Register</Link>
+      <Link to="/login">Login</Link>
     </div>
   );
 };

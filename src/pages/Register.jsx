@@ -53,7 +53,7 @@ const Register = () => {
           type="submit"
           className="inline-flex disabled:opacity-40 items-center justify-center px-4 py-2 border  border-transparent bg-indigo-600 hover:bg-indigo-700 rounded-md focus:outline-none focus:ring-2 cursor-pointer focus:ring-offset-2 focus:ring-indigo-500 text-white font-medium "
         >
-          Kayıt Ol
+          Register
         </button>
       </div>
     </form>

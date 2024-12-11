@@ -3,101 +3,70 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 import toast from "react-hot-toast";
 import store from "./redux/store";
 import { login as loginHandle, logout as logOutHandle } from "./redux/userSlice";
+import firebaseConfig from './firebaseConfig';
 
-
-
-
-const firebaseConfig = {
-    apiKey: import.meta.env.VITE_REACT_APP_API_KEY,
-    authDomain: import.meta.env.VITE_REACT_APP_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_REACT_APP_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_REACT_APP_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_REACT_APP_ID,
-};
-
+ 
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth()
 
 
-
 export const register = async (email, password) => {
     try {
         const { user } = await createUserWithEmailAndPassword(auth, email, password)
-        toast.success("Hesap oluşturuldu.")
+        toast.success("Account created successfully.")
         return user
     } catch (error) {
         toast.error(error.message)
-
     }
-
-
 }
+
 export const login = async (email, password) => {
     try {
         const { user } = await signInWithEmailAndPassword(auth, email, password)
-        toast.success("giriş yapıldı")
+        toast.success("Successfully logged in")
         return user
     } catch (error) {
         toast.error(error.message)
-
     }
-
-
 }
+
 export const logout = async () => {
     try {
         await signOut(auth)
-        toast.success("çıkış yapıldı")
+        toast.success("Successfully logged out")
         return true
-
     } catch (error) {
         toast.error(error.message)
-
     }
-
-
 }
 
 export const update = async (data) => {
     try {
         await updateProfile(auth.currentUser, data)
-        toast.success("Profil güncellendi")
+        toast.success("Profile updated successfully")
         return true
-
-
     } catch (error) {
         toast.error(error.message)
-
-
     }
-
 }
 
 export const resetPassword = async (password) => {
     try {
         await updatePassword(auth.currentUser, password)
-        toast.success("Parolanız güncellendi")
+        toast.success("Your password has been updated")
         return true
-
-
     } catch (error) {
         toast.error(error.message)
-
-
     }
-
 }
+
 export const emailVerification = async () => {
     try {
         await sendEmailVerification(auth.currentUser)
-        toast.success(`Doğrulama maili ${auth.currentUser.email} adresine gönerildi lütfen mailinizi kontrol edin
-        `)
-
+        toast.success(`Verification email sent to ${auth.currentUser.email}. Please check your email.`)
     } catch (error) {
         toast.error(error.message)
-
     }
 }
 
