@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Loader2 } from 'lucide-react';
-import { auth } from '../firebase';
+//import { auth } from '../firebase';
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Import onAuthStateChanged
 
 const EmbeddedMap = () => {
+  const auth = getAuth(); // Get the auth instance
   const [isLoading, setIsLoading] = useState(true);
   const [mapUrl, setMapUrl] = useState(null);
   const [error, setError] = useState(null);
@@ -16,36 +18,39 @@ const EmbeddedMap = () => {
     ? 'https://zero-kare5-837262597425.us-central1.run.app'
     : 'http://localhost:5050';
 
-  useEffect(() => {
-    const fetchMapUrl = async () => {
-      if (!user) return;
-      
-      try {
-        const token = await auth.currentUser?.getIdToken(true);
-        if (!token) {
-          throw new Error('Authentication required');
-        }
-
-        const response = await fetch(`${API_BASE}/record/map`, {
-          headers: {
-            'Authorization': `Bearer ${token}`
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, async (user) => { // Use async here
+        if (user) {
+          try {
+            const token = await user.getIdToken(true);
+            console.log("ID Token:", token);
+  
+            const response = await fetch(`${API_BASE}/record/map`, {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+  
+            if (!response.ok) {
+              throw new Error('Failed to fetch map data');
+            }
+  
+            const data = await response.text();
+            setMapUrl(data);
+          } catch (err) {
+            setError(err.message);
+            console.error('Error fetching map:', err);
+          } finally {
+            setIsLoading(false); // Set loading to false after fetching, regardless of success or failure
           }
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch map data');
+        } else {
+            setMapUrl(null); // Clear mapUrl if user is not logged in
+            setIsLoading(false); // Set loading to false if not logged in
         }
-
-        const data = await response.text();
-        setMapUrl(data);
-      } catch (err) {
-        setError(err.message);
-        console.error('Error fetching map:', err);
-      }
-    };
-
-    fetchMapUrl();
-  }, [user, API_BASE]);
+      });
+  
+      return () => unsubscribe(); // Unsubscribe from onAuthStateChanged when component unmounts
+    }, [API_BASE, auth]); // API_BASE should be in the dependency array
 
   const handleIframeLoad = () => {
     setIsLoading(false);
