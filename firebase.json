@@ -2,24 +2,15 @@
   "hosting": {
     "site": "zerok",
     "public": "dist",
-    "headers": [
+    "rewrites":[
       {
-        "source": "**/*.@(js|css|html|json|ico|png|jpg|jpeg|svg|woff|woff2|ttf|eot)",
-        "headers": [
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
-          {
-            "key": "Access-Control-Allow-Methods",
-            "value": "GET, POST, PUT, DELETE, OPTIONS"
-          },
-          {
-            "key": "Access-Control-Allow-Headers",
-            "value": "Authorization, Content-Type"
-          }
-        ]
+        "source": "**",
+        "run": {
+          "serviceId": "zero-kare5",
+          "region": "us-central1"
+        }
       }
-    ]
+    ]      
+   
   }
 }
